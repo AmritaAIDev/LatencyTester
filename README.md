@@ -1,8 +1,10 @@
 # latency_tester
 
-A new Flutter project.
+A new Flutter project that trys different permutations and combinations of Voice to voice services and LLM's
 
-## Getting Started
+## Important links
+
+* pipelineId(serviceID)-https://dibd-bhashini.gitbook.io/bhashini-apis/available-models-for-usage
 
 This project is a starting point for a Flutter application.
 

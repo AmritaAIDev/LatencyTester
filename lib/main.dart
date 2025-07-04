@@ -28,13 +28,16 @@ class SelectionPage extends StatefulWidget {
 class _SelectionPageState extends State<SelectionPage> {
   String? selectedVoiceService;
   String? selectedLLMModel;
+  String? selectedLangauge;
+
 
   final List<String> voiceServices = [
-    "Flutter Package",
-    "Azure Speech",
+    //"Flutter Package",
+    "Bhasini",
+    //"Azure Speech",
     "Google Speech",
     "OpenAI Whisper",
-    "11 Labs",
+    //"11 Labs",
   ];
 
   final List<String> llmModels = [
@@ -43,20 +46,26 @@ class _SelectionPageState extends State<SelectionPage> {
     "Gemini",
   ];
 
+  final List<String> languages = [
+    "English",
+    "Malyalam",
+    "Tamil",
+  ];
+
   void _navigateToTestPage() {
-    if (selectedVoiceService != null && selectedLLMModel != null) {
+    if (selectedVoiceService != null && selectedLangauge != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => LatencyTestPage(
             voiceService: selectedVoiceService!,
-            llmModel: selectedLLMModel!,
+            langauge: selectedLangauge!,
           ),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please select both a Voice Service and an LLM Model.")),
+        SnackBar(content: Text("Please select both a Voice Service and language.")),
       );
     }
   }
@@ -64,26 +73,11 @@ class _SelectionPageState extends State<SelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Select Services for Latency Test')),
+      appBar: AppBar(title: Text('Audio-Lingo')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            DropdownButtonFormField<String>(
-              value: selectedLLMModel,
-              items: llmModels.map((model) {
-                return DropdownMenuItem<String>(
-                  value: model,
-                  child: Text(model),
-                );
-              }).toList(),
-              onChanged: (value) => setState(() => selectedLLMModel = value),
-              decoration: InputDecoration(
-                labelText: "Select LLM Model",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 16),
 
             DropdownButtonFormField<String>(
               value: selectedVoiceService,
@@ -99,10 +93,41 @@ class _SelectionPageState extends State<SelectionPage> {
                 border: OutlineInputBorder(),
               ),
             ),
+
+            SizedBox(height: 16),
+
+            // DropdownButtonFormField<String>(
+            //   value: selectedLLMModel,
+            //   items: llmModels.map((model) {
+            //     return DropdownMenuItem<String>(
+            //       value: model,
+            //       child: Text(model),
+            //     );
+            //   }).toList(),
+            //   onChanged: (value) => setState(() => selectedLLMModel = value),
+            //   decoration: InputDecoration(
+            //     labelText: "Select LLM Model",
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
+            DropdownButtonFormField<String>(
+              value: selectedLangauge,
+              items: languages.map((language) {
+                return DropdownMenuItem<String>(
+                  value: language,
+                  child: Text(language),
+                );
+              }).toList(),
+              onChanged: (value) => setState(() => selectedLangauge = value),
+              decoration: const InputDecoration(
+                labelText: "Select your language for translation",
+                border: OutlineInputBorder(),
+              ),
+            ),
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: _navigateToTestPage,
-              child: Text("Start Latency Test"),
+              child: Text("Proceed"),
             ),
           ],
         ),
