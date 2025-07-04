@@ -42,5 +42,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-lib/constants/constants.dart
+#lib/constants/constants.dart
 assets/speech-to-text-service.json
